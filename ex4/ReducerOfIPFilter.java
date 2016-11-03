@@ -4,9 +4,13 @@ import java.util.Scanner;
 
 public class ReducerOfIPFilter {
 	public static void main(String[] args) throws ParseException{
+		String[] datas=args[0].split(",",2);
+		if(datas.length<1){
+			return;
+		}
 		SimpleDateFormat regularFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date beginDate = regularFormat.parse("2015-12-31 18:00:00");//查询的开始的时间
-		Date endDate = regularFormat.parse("2015-12-31 19:00:00");//查询的接触时间
+		Date beginDate = regularFormat.parse(datas[0]);//查询的开始的时间
+		Date endDate = regularFormat.parse(datas[1]);//查询的接触时间
 		Scanner scanner = new Scanner(System.in);
 		 String key=null;
 		 String value=null;
