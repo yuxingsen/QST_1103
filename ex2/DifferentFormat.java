@@ -19,7 +19,7 @@ public class DifferentFormat {
 	public static void main(String[] args){
 		Scanner scanner = new Scanner(System.in);
 		Locale locale = Locale.US; //创建一个美国的locale的对象的有用常量
-		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", locale); //给定格式与语言环境进行时间转换 
+		SimpleDateFormat inputFormat = new SimpleDateFormat("d/MMM/yyyy:HH:mm:ss", locale); //给定格式与语言环境进行时间转换 
 		while (scanner.hasNext()){
 			String line = scanner.nextLine();
 			Date lineDate = null;
