@@ -18,16 +18,16 @@ public class DifferentFormat {
 	@SuppressWarnings("resource")
 	public static void main(String[] args){
 		Scanner scanner = new Scanner(System.in);
-		Locale locale = Locale.US; 
-		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", locale); //修改格式
+		Locale locale = Locale.US; //创建一个美国的locale的对象的有用常量
+		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", locale); //给定格式与语言环境进行时间转换 
 		while (scanner.hasNext()){
 			String line = scanner.nextLine();
 			Date lineDate = null;
 			long lineTimestamp;
 			try {
-				lineDate = inputFormat.parse(line);
-				lineTimestamp = lineDate.getTime();
-				System.out.println(lineTimestamp);
+				lineDate = inputFormat.parse(line);//转格式
+				lineTimestamp = lineDate.getTime();//得到时间戳
+				System.out.println(lineTimestamp);//打印时间戳
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
