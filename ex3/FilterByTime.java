@@ -22,17 +22,33 @@ public class FilterByTime {
 		Date beginDate = regularFormat.parse("2015-12-31 18:00:00");
 		Date endDate = regularFormat.parse("2015-12-31 19:00:00");
 		String filePath = "./access.log";
-		FileInputStream inputStream = new FileInputStream(filePath);
-		Scanner scanner = new Scanner(inputStream, "UTF-8");
-		while (scanner.hasNext()){
-			// 对每行进行处理
-			String line = scanner.nextLine();
-			// 切分获取IP，Time
-			String strIp = null;
-			String strTime = null;
-			// 对在时间区间内的数据进行输出
-			System.out.println(strIp + "\t" + strTime);
-		}
+		BufferedReader bw=new BufferedReader(new FileReader(filePath));//通过bufferedreader读取文件信息，
+	        String line=null;//
+	        while((line=bw.readLine())!=null){
+		// 切分获取IP，Time
+			//通过正则匹配出ip与时间
+		     String pattern="(\\d+\\.\\d+\\.\\d+\\.\\d+).{5}\\[(\\d+\\/[a-zA-Z]+\\/\\d+\\:\\d+\\:\\d+\\:\\d+).{13}\\/((show|musicians).\\d+)";  
+		     Pattern r = Pattern.compile(pattern);//定义一个匹配器
+		     Matcher m = r.matcher(line);//进行匹配
+		     if (m.find()){
+			        String strIp = m.group(1);//把ipg赋给
+				String strTime = m.group(2)//把时间赋给
+					Date date=paseTime(strTime);//把时间字符串进行转换s成date格式
+					if(date.after(beginDate)&&date.before(endDate)){//判断时间是否在范围内
+					// 对在时间区间内的数据进行输出
+					System.out.println(strIp + "\t" + strTime);
+				}
+			
+		         }
+		 }
 	}
+	private static Date paseTime(String line) throws ParseException{
+	 SimpleDateFormat format = new SimpleDateFormat("d/MMM/yyyy:HH:mm:ss", Locale.ENGLISH);
+	 SimpleDateFormat dateformat1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String times = line.trim();
+		String data=(dateformat1.format(format.parse(times)));
+		Date data1=dateformat1.parse(data);	
+	return data1;
+}
 	
 }
